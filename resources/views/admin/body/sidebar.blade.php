@@ -84,8 +84,8 @@
         </a>
         <div class="collapse" id="ui-basic">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="">All Music</a></li>
-            <li class="nav-item"> <a class="nav-link" href="">Add Music</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{route('all.music')}}">All Music</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{route('add.music')}}">Add Music</a></li>
           </ul>
         </div>
 

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('artist_name');
             $table->string('song_title');
+            $table->string('photo')->nullable();
             $table->string('video')->nullable();
             $table->string('audio')->nullable();
             $table->string('youtube_url')->nullable();

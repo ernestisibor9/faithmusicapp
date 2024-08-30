@@ -1,22 +1,20 @@
 @extends('dashboard')
 
 @section('admin')
-
-{{-- @section('title')
+    {{-- @section('title')
 	RealMatterInfo - Admin Dashboard
 @endsection --}}
 
-    {{-- @php
+    @php
         $id = Auth::user()->id;
         $profileData = App\Models\User::find($id);
+    @endphp
 
-        $categories = App\Models\Category::latest()->limit(3)->get();
-    @endphp --}}
     <div class="content-wrapper">
         <div class="row">
             <div class="col-sm-6">
-                <h3 class="mb-0 font-weight-bold"></h3>
-                <p>You are welcome </p>
+                <h3 class="mb-0 font-weight-bold">{{ $profileData->name }}</h3>
+                <p>You are welcome {{ $profileData->name }}</p>
             </div>
             {{-- <div class="col-sm-6">
                 <div class="d-flex align-items-center justify-content-md-end">
@@ -50,12 +48,13 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-wrap justify-content-between">
-                            <h4 class="card-title mb-3">Photo</h4>
+                            <h4 class="card-title mb-3">{{ $profileData->name }} Photo</h4>
                         </div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="row">
-                                    <img src="" alt="" class="img-fluid">
+                                    <img src="{{ !empty($profileData->photo) ? url('upload/admin_images/' . $profileData->photo) : url('upload/no_image.jpeg') }}"
+                                        alt="" class="img-fluid">
                                     {{-- <div class="col-lg-6">
                                         <div id="circleProgress6" class="progressbar-js-circle rounded p-3"></div>
                                     </div>
@@ -116,7 +115,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-wrap justify-content-between">
-                            <h4 class="card-title mb-3">Profile</h4>
+                            <h4 class="card-title mb-3">{{ $profileData->name }} Profile</h4>
                         </div>
                         <div class="row">
                             <div class="col-12">
@@ -124,19 +123,19 @@
                                     <div class="col-sm-12">
                                         <div class="d-flex justify-content-between mb-4">
                                             <div>Name</div>
-                                            <div class="text-muted"></div>
+                                            <div class="text-muted">{{ $profileData->name }}</div>
                                         </div>
                                         <div class="d-flex justify-content-between mb-4">
                                             <div>Email</div>
-                                            <div class="text-muted"></div>
+                                            <div class="text-muted">{{ $profileData->email }}</div>
                                         </div>
                                         <div class="d-flex justify-content-between mb-4">
                                             <div>Phone</div>
-                                            <div class="text-muted"></div>
+                                            <div class="text-muted">{{ $profileData->phone }}</div>
                                         </div>
                                         <div class="d-flex justify-content-between mb-4">
                                             <div>Address</div>
-                                            <div class="text-muted"></div>
+                                            <div class="text-muted">{{ $profileData->address }}</div>
                                         </div>
                                         <div class="progress progress-md mt-4">
                                             <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
@@ -151,21 +150,51 @@
             </div>
         </div>
 
-        <div class="col-xl-11 d-flex grid-margin stretch-card">
+        {{-- <div class="col-xl-11 d-flex grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-        <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Category</h4>
-                    <div class="table-responsive pt-3">
-
+                    <div class="row">
+                        <div class="col-lg-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Category</h4>
+                                    <div class="table-responsive pt-3">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        #
+                                                    </th>
+                                                    <th>
+                                                        Category Name
+                                                    </th>
+                                                    <th>
+                                                        Action
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($categories as $key => $category)
+                                                    <tr>
+                                                        <td>{{ $key + 1 }}</td>
+                                                        <td>{{ $category->category_name }}</td>
+                                                        <td>
+                                                            <a href="{{ route('edit.category', $category->id) }}"
+                                                                class="btn btn-info">Edit</a>
+                                                            <a href="{{ route('delete.category', $category->id) }}"
+                                                                class="btn btn-danger" id="delete">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-        </div>
-                </div></div></div>
+            </div>
+        </div> --}}
     </div>
 @endsection
